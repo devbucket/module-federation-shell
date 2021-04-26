@@ -4,13 +4,12 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-const deps = require("./package.json").dependencies;
-const { webpack } = require('webpack');
-
 const ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
   entry: './src/index',
+
+  mode: ENV,
 
   cache: false,
 
@@ -23,7 +22,7 @@ module.exports = {
   },
 
   devServer: {
-    // hot: true,
+    hot: true,
     port: process.env.APP_MAIN_PORT,
     historyApiFallback: true,
   },
@@ -53,13 +52,13 @@ module.exports = {
               "@babel/preset-env",
               "@babel/preset-react"
             ],
-            // env: {
-            //   development: {
-            //     plugins: [
-            //       'react-refresh/babel',
-            //     ],
-            //   },
-            // },
+            env: {
+              development: {
+                plugins: [
+                  'react-refresh/babel',
+                ],
+              },
+            },
           },
         },
       },
@@ -67,9 +66,9 @@ module.exports = {
   },
 
   plugins: [
-    // (ENV === 'development') && new ReactRefreshWebpackPlugin({
-    //   exclude: [/node_modules/],
-    // }),
+    (ENV === 'development') && new ReactRefreshWebpackPlugin({
+      exclude: [/node_modules/],
+    }),
     new ModuleFederationPlugin({
       name: "shell",
       filename: "remoteEntry.js",
