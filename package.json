@@ -5,7 +5,7 @@
   "repository": "git@github.com:devbucket/module-federation-shell.git",
   "license": "MIT",
   "scripts": {
-    "build": "NODE_ENV=production webpackpack",
+    "build": "NODE_ENV=production webpack",
     "start": "NODE_ENV=development webpack-dev-server"
   },
   "dependencies": {
