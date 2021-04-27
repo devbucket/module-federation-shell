@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
-import { Jumbotron, Row, Col } from 'react-bootstrap'
+import { Jumbotron, Row, Col } from 'react-bootstrap';
 import { ProfileCard } from 'profile/components';
-import { View } from '../components/View'
+import { View } from '../components/View';
 
 const HomePage = memo(
   function HomePage() {

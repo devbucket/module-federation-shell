@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 export const View = memo(
   function View({ children }) {
@@ -12,5 +12,5 @@ export const View = memo(
 );
 
 View.propTypes = {
-  children: PropTypes.node.isRequired
-}
+  children: PropTypes.node.isRequired,
+};

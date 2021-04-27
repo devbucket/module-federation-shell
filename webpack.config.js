@@ -1,7 +1,7 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const ENV = process.env.NODE_ENV || 'development';
@@ -18,7 +18,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".jsx", ".js", ".json"],
+    extensions: ['.jsx', '.js', '.json'],
   },
 
   devServer: {
@@ -27,30 +27,30 @@ module.exports = {
     historyApiFallback: true,
   },
 
-  devtool: "source-map",
+  devtool: 'source-map',
 
   module: {
     rules: [
       {
         test: /\.m?js/,
-        type: "javascript/auto",
+        type: 'javascript/auto',
         resolve: {
           fullySpecified: false,
         },
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: [
-              "@babel/preset-env",
-              "@babel/preset-react"
+              '@babel/preset-env',
+              '@babel/preset-react',
             ],
             env: {
               development: {
@@ -70,30 +70,30 @@ module.exports = {
       exclude: [/node_modules/],
     }),
     new ModuleFederationPlugin({
-      name: "shell",
-      filename: "remoteEntry.js",
+      name: 'shell',
+      filename: 'remoteEntry.js',
       remotes: {
         shell: `shell@${process.env.APP_MAIN_URL}remoteEntry.js`,
         profile: `profile@${process.env.APP_PROFILE_URL}remoteEntry.js`,
       },
       exposes: {
         './App': './src/App',
-        './View': './src/components/View'
+        './View': './src/components/View',
       },
       shared: {
         react: {
           singleton: true,
         },
-        "react-dom": {
+        'react-dom': {
           singleton: true,
         },
-        "react-router-dom": {
+        'react-router-dom': {
           singleton: true,
         },
       },
     }),
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
   ].filter(Boolean),
 };
